@@ -550,6 +550,130 @@ Depende|Jarabe de Palo|1998|es|rock
 Soldadito marinero|Fito & Fitipaldis|1998|es|rock
 Azul|Cristian Castro|1999|es|balada
 Te conozco bien|Marc Anthony|1999|es|latin
+Bye Bye Bye|*NSYNC|2000|en|pop
+Oops!... I Did It Again|Britney Spears|2000|en|pop
+Independent Women|Destiny's Child|2000|en|rnb
+Stan|Eminem|2000|en|hiphop
+The Real Slim Shady|Eminem|2000|en|hiphop
+Kryptonite|3 Doors Down|2000|en|rock
+Last Resort|Papa Roach|2000|en|rock
+Lady (Hear Me Tonight)|Modjo|2000|en|dance
+Who Let the Dogs Out|Baha Men|2000|en|dance
+Music|Madonna|2000|en|dance
+Spinning Around|Kylie Minogue|2000|en|dance
+Pure Shores|All Saints|2000|en|pop
+Fallin'|Alicia Keys|2001|en|rnb
+Hero|Enrique Iglesias|2001|en|pop
+Drops of Jupiter|Train|2001|en|rock
+Clint Eastwood|Gorillaz|2001|en|hiphop
+Last Nite|The Strokes|2001|en|rock
+Can't Get You Out of My Head|Kylie Minogue|2001|en|dance
+Lady Marmalade|Christina Aguilera|2001|en|pop
+Whenever, Wherever|Shakira|2001|en|pop
+Survivor|Destiny's Child|2001|en|rnb
+Get the Party Started|P!nk|2001|en|pop
+Family Affair|Mary J. Blige|2001|en|rnb
+Bootylicious|Destiny's Child|2001|en|rnb
+How You Remind Me|Nickelback|2001|en|rock
+Chop Suey!|System of a Down|2001|en|rock
+Plug In Baby|Muse|2001|en|rock
+Hot in Herre|Nelly|2002|en|hiphop
+Dilemma|Nelly|2002|en|hiphop
+A Thousand Miles|Vanessa Carlton|2002|en|pop
+Dirrty|Christina Aguilera|2002|en|pop
+Beautiful|Christina Aguilera|2002|en|pop
+Without Me|Eminem|2002|en|hiphop
+Foolish|Ashanti|2002|en|rnb
+Don't Know Why|Norah Jones|2002|en|pop
+Sk8er Boi|Avril Lavigne|2002|en|rock
+Cry Me a River|Justin Timberlake|2002|en|pop
+Like a Stone|Audioslave|2002|en|rock
+Do You Realize??|The Flaming Lips|2002|en|rock
+Stacy's Mom|Fountains of Wayne|2003|en|rock
+Where Is the Love?|Black Eyed Peas|2003|en|hiphop
+Ignition (Remix)|R. Kelly|2003|en|rnb
+Get Busy|Sean Paul|2003|en|dance
+The Reason|Hoobastank|2003|en|rock
+Milkshake|Kelis|2003|en|rnb
+Maps|Yeah Yeah Yeahs|2003|en|rock
+Time Is Running Out|Muse|2003|en|rock
+Yeah!|Usher|2004|en|rnb
+Take Me Out|Franz Ferdinand|2004|en|rock
+American Idiot|Green Day|2004|en|rock
+Call on Me|Eric Prydz|2004|en|dance
+Burn|Usher|2004|en|rnb
+Float On|Modest Mouse|2004|en|rock
+Vertigo|U2|2004|en|rock
+Goodies|Ciara|2004|en|rnb
+My Boo|Usher|2004|en|rnb
+I Predict a Riot|Kaiser Chiefs|2004|en|rock
+Somebody Told Me|The Killers|2004|en|rock
+Feel Good Inc.|Gorillaz|2005|en|hiphop
+Fix You|Coldplay|2005|en|rock
+Don't Cha|The Pussycat Dolls|2005|en|pop
+Be Without You|Mary J. Blige|2005|en|rnb
+Pon de Replay|Rihanna|2005|en|dance
+Behind These Hazel Eyes|Kelly Clarkson|2005|en|pop
+Sugar, We're Goin Down|Fall Out Boy|2005|en|rock
+We Belong Together|Mariah Carey|2005|en|rnb
+Bad Day|Daniel Powter|2005|en|pop
+You're Beautiful|James Blunt|2005|en|pop
+Hollaback Girl|Gwen Stefani|2005|en|pop
+My Humps|Black Eyed Peas|2005|en|hiphop
+Beverly Hills|Weezer|2005|en|rock
+I Write Sins Not Tragedies|Panic! at the Disco|2005|en|rock
+I Bet You Look Good on the Dancefloor|Arctic Monkeys|2005|en|rock
+Welcome to the Black Parade|My Chemical Romance|2006|en|rock
+Dani California|Red Hot Chili Peppers|2006|en|rock
+Promiscuous|Nelly Furtado|2006|en|pop
+Put Your Records On|Corinne Bailey Rae|2006|en|pop
+Chasing Cars|Snow Patrol|2006|en|rock
+Smile|Lily Allen|2006|en|pop
+SOS|Rihanna|2006|en|pop
+Starlight|Muse|2006|en|rock
+Supermassive Black Hole|Muse|2006|en|rock
+Chelsea Dagger|The Fratellis|2006|en|rock
+When You Were Young|The Killers|2006|en|rock
+Naïve|The Kooks|2006|en|rock
+Ain't No Other Man|Christina Aguilera|2006|en|pop
+Apologize|Timbaland|2007|en|pop
+Shut Up and Drive|Rihanna|2007|en|pop
+Gimme More|Britney Spears|2007|en|pop
+Crank That (Soulja Boy)|Soulja Boy|2007|en|hiphop
+Bubbly|Colbie Caillat|2007|en|pop
+Don't Stop the Music|Rihanna|2007|en|dance
+1234|Feist|2007|en|pop
+The Pretender|Foo Fighters|2007|en|rock
+Time to Pretend|MGMT|2007|en|rock
+Kids|MGMT|2007|en|rock
+Paper Planes|M.I.A.|2007|en|hiphop
+Ruby|Kaiser Chiefs|2007|en|rock
+Fluorescent Adolescent|Arctic Monkeys|2007|en|rock
+Low|Flo Rida|2007|en|hiphop
+Pocketful of Sunshine|Natasha Bedingfield|2008|en|pop
+Disturbia|Rihanna|2008|en|pop
+Just Dance|Lady Gaga|2008|en|dance
+American Boy|Estelle|2008|en|hiphop
+Chasing Pavements|Adele|2008|en|rnb
+Mercy|Duffy|2008|en|rnb
+Love Lockdown|Kanye West|2008|en|hiphop
+Lollipop|Lil Wayne|2008|en|hiphop
+A Milli|Lil Wayne|2008|en|hiphop
+I Kissed a Girl|Katy Perry|2008|en|pop
+So What|P!nk|2008|en|pop
+Human|The Killers|2008|en|rock
+Hot n Cold|Katy Perry|2008|en|pop
+You Belong with Me|Taylor Swift|2008|en|country
+Heartless|Kanye West|2008|en|hiphop
+Boom Boom Pow|Black Eyed Peas|2009|en|hiphop
+Down|Jay Sean|2009|en|rnb
+Hey, Soul Sister|Train|2009|en|pop
+Paparazzi|Lady Gaga|2009|en|pop
+Fireflies|Owl City|2009|en|pop
+Party in the U.S.A.|Miley Cyrus|2009|en|pop
+TiK ToK|Kesha|2009|en|pop
+Whatcha Say|Jason Derulo|2009|en|rnb
+Meet Me Halfway|Black Eyed Peas|2009|en|dance
 `;
 
 const GENRES = {
