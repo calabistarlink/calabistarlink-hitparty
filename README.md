@@ -10,7 +10,7 @@ Juego tipo Hitster desde el teléfono: suena una canción (vista previa de 30 s)
 - **Audio:** iTunes Search API (sin clave ni cuenta). Requiere internet.
 - PWA instalable; los datos viven solo en el teléfono.
 
-Catálogo base de ~480 canciones en `songs.js` (una línea por canción: `título|artista|año|idioma|género`).
+Catálogo base de ~550 canciones en `songs.js` (una línea por canción: `título|artista|año|idioma|género`).
 
 ## Spotify (opcional)
 1. Crea una app en https://developer.spotify.com/dashboard y copia su **Client ID** (32 caracteres).

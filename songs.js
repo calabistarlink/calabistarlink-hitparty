@@ -477,6 +477,79 @@ Despechá|Rosalía|2022|es|pop
 Super Shy|NewJeans|2023|ko|pop
 Espresso|Sabrina Carpenter|2024|en|pop
 Not Like Us|Kendrick Lamar|2024|en|hiphop
+Enamorado de la moda juvenil|Radio Futura|1980|es|rock
+Se nos rompió el amor|Rocío Jurado|1980|es|balada
+Hey|Julio Iglesias|1980|es|balada
+Barco a Venus|Mecano|1981|es|pop
+De niña a mujer|Julio Iglesias|1981|es|balada
+Maquillaje|Mecano|1982|es|pop
+Me colé en una fiesta|Mecano|1982|es|pop
+Los dinosaurios|Charly García|1983|es|rock
+Lobo-hombre en París|La Unión|1984|es|pop
+Amante bandido|Miguel Bosé|1984|es|pop
+Demoliendo hoteles|Charly García|1984|es|rock
+La jaula de oro|Los Tigres del Norte|1984|es|latin
+Cali pachanguero|Grupo Niche|1984|es|latin
+Devuélveme a mi chica|Hombres G|1985|es|pop
+Marta tiene un marcapasos|Hombres G|1985|es|pop
+Yo vengo a ofrecer mi corazón|Fito Páez|1985|es|rock
+Cruz de navajas|Mecano|1986|es|pop
+Sufre mamón|Hombres G|1986|es|pop
+Venezia|Hombres G|1986|es|pop
+A quién le importa|Alaska y Dinarama|1986|es|pop
+Cien gaviotas|Duncan Dhu|1986|es|pop
+Pateando piedras|Los Prisioneros|1986|es|rock
+Tu cárcel|Los Bukis|1986|es|latin
+La estatua del jardín botánico|Radio Futura|1987|es|rock
+Pero a tu lado|Los Secretos|1987|es|rock
+Cadillac solitario|Loquillo y Los Trogloditas|1987|es|rock
+Estrechez de corazón|Los Prisioneros|1987|es|rock
+Ahora te puedes marchar|Luis Miguel|1987|es|balada
+Culpable o no|Luis Miguel|1987|es|balada
+Un año más|Mecano|1988|es|pop
+Mujer contra mujer|Mecano|1988|es|pop
+Visa para un sueño|Juan Luis Guerra|1989|es|latin
+Maldita primavera|Yuri|1989|es|pop
+Maldito duende|Héroes del Silencio|1990|es|rock
+En la ciudad de la furia|Soda Stereo|1990|es|rock
+Bachata rosa|Juan Luis Guerra|1990|es|latin
+Piensa en mí|Luz Casal|1991|es|balada
+Bailar pegados|Sergio Dalma|1991|es|pop
+Pelo suelto|Gloria Trevi|1991|es|pop
+Dr. Psiquiatra|Gloria Trevi|1991|es|pop
+Pachuco|Maldita Vecindad|1991|es|rock
+Kumbala|Maldita Vecindad|1991|es|rock
+Con los ojos cerrados|Gloria Trevi|1992|es|pop
+Oye mi amor|Maná|1992|es|rock
+La ingrata|Café Tacvba|1992|es|rock
+La célula que explota|Caifanes|1992|es|rock
+Un vestido y un amor|Fito Páez|1992|es|rock
+Al lado del camino|Fito Páez|1992|es|rock
+Mi tierra|Gloria Estefan|1993|es|latin
+Zona de promesas|Soda Stereo|1993|es|rock
+La chispa adecuada|Héroes del Silencio|1993|es|rock
+Afuera|Caifanes|1994|es|rock
+La media vuelta|Luis Miguel|1994|es|balada
+Mariposa Tecknicolor|Fito Páez|1994|es|rock
+Mentira|La Ley|1995|es|rock
+Bolero falaz|Aterciopelados|1995|es|rock
+Si tú te vas|Enrique Iglesias|1995|es|pop
+Por amarte|Enrique Iglesias|1995|es|pop
+La carretera|Julio Iglesias|1995|es|balada
+Avalancha|Héroes del Silencio|1995|es|rock
+So payaso|Extremoduro|1996|es|rock
+En el muelle de San Blas|Maná|1997|es|rock
+Amiga mía|Alejandro Sanz|1997|es|pop
+Amor a la mexicana|Thalía|1997|es|pop
+Gimme tha Power|Molotov|1997|es|rock
+Ciega, sordomuda|Shakira|1998|es|pop
+Torero|Chayanne|1998|es|pop
+Salomé|Chayanne|1998|es|pop
+Vuelve|Ricky Martin|1998|es|pop
+Depende|Jarabe de Palo|1998|es|rock
+Soldadito marinero|Fito & Fitipaldis|1998|es|rock
+Azul|Cristian Castro|1999|es|balada
+Te conozco bien|Marc Anthony|1999|es|latin
 `;
 
 const GENRES = {
