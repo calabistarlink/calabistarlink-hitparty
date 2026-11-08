@@ -119,7 +119,7 @@ const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '
 const DECADES = [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
 
 /* ---------- estado ---------- */
-const DEFAULTS = { players: ['Jugador 1', 'Jugador 2'], mode: 'timeline', target: 8, rounds: 5, from: 1950, to: 2025, langs: [], genres: [], noRepeat: true, useCustom: true, spId: '', onlySp: false };
+const DEFAULTS = { players: ['Jugador 1', 'Jugador 2'], mode: 'timeline', target: 8, rounds: 5, from: 1950, to: 2025, langs: [], genres: [], noRepeat: true, useCustom: true, spId: '', onlySp: false, steal: true, tokens: 2 };
 let S = Object.assign({}, DEFAULTS, lsGet('hp_settings', {}));
 let custom = lsGet('hp_custom', []);          // canciones propias
 let seen = new Set(lsGet('hp_seen', []));     // ya jugadas en partidas anteriores
@@ -313,7 +313,8 @@ function startGame() {
   const q = shuffle(ps).map(s => s.id);
   const byId = Object.fromEntries(allSongs().map(s => [s.id, s]));
   G = { mode: S.mode, target: S.target, rounds: S.rounds, from: S.from, to: S.to, queue: q, byId: {}, over: false, turn: 0, phase: 'play',
-        players: S.players.map(n => ({ name: n.trim() || 'Jugador', cards: [], score: 0, played: 0 })), current: null, pick: null, guess: null, res: null };
+        steal: S.mode === 'timeline' && S.steal, thief: null, stealPick: null,
+        players: S.players.map(n => ({ name: n.trim() || 'Jugador', cards: [], score: 0, played: 0, tokens: S.tokens })), current: null, pick: null, guess: null, res: null };
   q.forEach(id => G.byId[id] = byId[id]);
   if (G.mode === 'timeline') G.players.forEach(p => { const id = G.queue.shift(); p.cards = [G.byId[id]]; seen.add(id); });
   nextSong(); view = 'game'; lsSet('hp_seen', [...seen]);
@@ -326,13 +327,20 @@ function nextSong() {
   loadAudio(G.current);
   const nx = G.queue[0]; if (nx) lookup(G.byId[nx]); // precarga del siguiente
 }
+const fits = (c, i, y) => (i === 0 || c[i - 1].year <= y) && (i === c.length || y <= c[i].year);
 function confirm_() {
+  if (G.mode === 'timeline' && G.steal && G.players.some((x, i) => i !== G.turn && x.tokens > 0)) { G.phase = 'steal'; G.thief = null; G.stealPick = null; saveG(); return; }
+  resolve_();
+}
+function resolve_() {
   const p = G.players[G.turn], s = G.current; stopAll();
   if (G.mode === 'timeline') {
-    const c = p.cards, i = G.pick;
-    const ok = (i === 0 || c[i - 1].year <= s.year) && (i === c.length || s.year <= c[i].year);
-    if (ok) c.splice(i, 0, s);
-    G.res = { ok, text: ok ? '¡Acertó! La carta se queda.' : 'Fallo. La carta se descarta.' };
+    const c = p.cards, ok = fits(c, G.pick, s.year), th = G.thief != null ? G.players[G.thief] : null;
+    if (ok) { c.splice(G.pick, 0, s); G.res = { ok, text: th ? `¡Acertó! ${th.name} pierde su ficha.` : '¡Acertó! La carta se queda.' }; }
+    else if (th && fits(c, G.stealPick, s.year)) { /* el ladrón acertó su posición en la línea de quien falló */
+      const j = th.cards.findIndex(x => x.year > s.year); th.cards.splice(j < 0 ? th.cards.length : j, 0, s);
+      G.res = { ok: false, text: `Fallo. ¡${th.name} le robó la carta!` }; }
+    else G.res = { ok: false, text: th ? `Fallo, y ${th.name} también falló. La carta se descarta.` : 'Fallo. La carta se descarta.' };
   } else {
     const d = Math.abs(G.guess - s.year), pts = d === 0 ? 3 : d <= 2 ? 2 : d <= 5 ? 1 : 0;
     G.res = { ok: pts > 0, pts, d, bonus: false, text: d === 0 ? '¡Año exacto! +3' : pts ? `A ${d} año${d > 1 ? 's' : ''}: +${pts}` : `Se pasó por ${d} años: +0` };
@@ -342,7 +350,7 @@ function confirm_() {
 }
 function advance() {
   const p = G.players[G.turn];
-  if (G.mode === 'timeline' && p.cards.length >= G.target) return endGame();
+  if (G.mode === 'timeline' && G.players.some(x => x.cards.length >= G.target)) return endGame();
   if (G.mode === 'year' && G.players.every(x => x.played >= G.rounds)) return endGame();
   do { G.turn = (G.turn + 1) % G.players.length; } while (G.mode === 'year' && G.players[G.turn].played >= G.rounds);
   nextSong();
@@ -373,6 +381,8 @@ function setupView() {
   </div>
   <div class="row" style="margin-top:10px"><label class="field grow">${S.mode === 'timeline' ? 'Cartas para ganar' : 'Rondas por jugador'}
     <input type="number" inputmode="numeric" data-num="${S.mode === 'timeline' ? 'target' : 'rounds'}" min="3" max="30" value="${S.mode === 'timeline' ? S.target : S.rounds}"></label></div>
+  ${S.mode === 'timeline' ? `<label class="check"><input type="checkbox" data-chk="steal" ${S.steal ? 'checked' : ''}> Permitir robar cartas (cuesta 1 ficha)</label>
+    ${S.steal ? `<label class="field">Fichas iniciales por jugador<input type="number" inputmode="numeric" data-num="tokens" min="0" max="10" value="${S.tokens}"></label>` : ''}` : ''}
 
   <h2>Rango de años</h2>
   <div class="row"><label class="field grow">Desde<input type="number" inputmode="numeric" data-num="from" min="1940" max="2025" value="${S.from}"></label>
@@ -426,7 +436,7 @@ function setupView() {
 }
 
 function scoreBar() {
-  return `<div class="score">${G.players.map((p, i) => `<span class="pill ${i === G.turn ? 'on' : ''}">${esc(p.name)} · ${G.mode === 'timeline' ? p.cards.length + '/' + G.target : p.score + ' pts'}</span>`).join('')}</div>`;
+  return `<div class="score">${G.players.map((p, i) => `<span class="pill ${i === G.turn ? 'on' : ''}">${esc(p.name)} · ${G.mode === 'timeline' ? p.cards.length + '/' + G.target + (G.steal ? ' · 🪙' + (p.tokens || 0) : '') : p.score + ' pts'}</span>`).join('')}</div>`;
 }
 function songCard(s, extra = '') { return `<div class="song ${extra}"><span class="y">${s.year}</span><span><b>${esc(s.title)}</b><small>${esc(s.artist)}</small></span></div>`; }
 
@@ -434,12 +444,13 @@ function gameView() {
   const p = G.players[G.turn], s = G.current;
   const top = `<div class="top"><strong>Hitparty</strong><button class="ghost" data-act="quit">Terminar</button></div>${scoreBar()}`;
   const turn = `<div class="turn"><small>Turno de</small><h2>${esc(p.name)}</h2></div>`;
+  if (G.phase === 'steal') return stealView(top, turn, p);
   if (G.phase === 'reveal') {
     const art = audioState.art ? `<img src="${esc(audioState.art)}" alt="" onerror="this.remove()">` : '';
     const last = !G.queue.length;
     return top + `<div class="reveal">${art}<div class="y">${s.year}</div><h3>${esc(s.title)}</h3><p class="sub">${esc(s.artist)} · ${esc(LANGS[s.lang] || '')} · ${esc(GENRES[s.genre] || '')}</p>
       <div class="res ${G.res.ok ? 'ok' : 'no'}">${esc(G.res.text)}</div>
-      ${G.mode === 'year' ? `<label class="check" style="justify-content:center"><input type="checkbox" data-chk="bonus" ${G.res.bonus ? 'checked' : ''}> Acertó título y artista (+1)</label>` : `<div class="tl">${p.cards.map(c => songCard(c, c === s ? 'new' : '')).join('')}</div>`}
+      ${G.mode === 'year' ? `<label class="check" style="justify-content:center"><input type="checkbox" data-chk="bonus" ${G.res.bonus ? 'checked' : ''}> Acertó título y artista (+1)</label>` : `${G.steal ? `<label class="check" style="justify-content:center"><input type="checkbox" data-chk="tbonus" ${G.res.tbonus ? 'checked' : ''}> ${esc(p.name)} acertó título y artista (+1 ficha)</label>` : ''}<div class="tl">${p.cards.map(c => songCard(c, c === s ? 'new' : '')).join('')}</div>`}
       <button class="primary" data-act="next">${esc('Siguiente')}</button></div>`;
   }
   let body;
@@ -455,10 +466,30 @@ function gameView() {
       <input type="range" id="gr" min="${G.from}" max="${G.to}" value="${Math.min(Math.max(G.guess, G.from), G.to)}" aria-label="Deslizar año"></div>
       <button class="primary" data-act="confirm">Confirmar año ${G.guess}</button>`;
   }
-  return top + turn + `<div class="player"><div class="q">?</div>
+  return top + turn + audioBox() + body;
+}
+const audioBox = () => `<div class="player"><div class="q">?</div>
       <button class="playbtn" id="play" data-act="play" disabled>…</button>
       <div class="bar"><i id="bar"></i></div><div class="note" id="anote"></div>
-      <button class="ghost" id="skip" data-act="skipsong" style="color:#fff;margin-top:8px" hidden>Saltar esta canción</button></div>` + body;
+      <button class="ghost" id="skip" data-act="skipsong" style="color:#fff;margin-top:8px" hidden>Saltar esta canción</button></div>`;
+function stealView(top, turn, p) {
+  const c = p.cards;
+  if (G.thief == null) {
+    return top + turn + audioBox() + `<div class="card" style="margin-top:14px"><b>¿Alguien quiere robar?</b>
+      <p class="sub" style="margin:4px 0 10px">Cuesta 1 ficha. Si ${esc(p.name)} falla y el ladrón acierta, la carta pasa a su línea.</p>
+      ${G.players.map((x, i) => i !== G.turn && x.tokens > 0 ? `<button class="ghost" style="width:100%;margin-bottom:8px" data-act="thief" data-v="${i}">${esc(x.name)} roba · 🪙${x.tokens}</button>` : '').join('')}
+      <button class="primary" style="font-size:16px;min-height:48px" data-act="nothief">Nadie roba · ver resultado</button></div>`;
+  }
+  const th = G.players[G.thief], slots = [];
+  for (let i = 0; i <= c.length; i++) {
+    slots.push(i === G.pick ? `<button class="slot" disabled>Elegida por ${esc(p.name)}</button>`
+      : `<button class="slot" data-act="steal-pick" data-v="${i}" aria-pressed="${G.stealPick === i}">${G.stealPick === i ? '✔ Aquí' : 'Poner aquí'}</button>`);
+    if (i < c.length) slots.push(songCard(c[i]));
+  }
+  return top + `<div class="turn"><small>Roba</small><h2>${esc(th.name)}</h2></div>` + audioBox() +
+    `<p class="sub" style="margin-top:12px">Elige otra posición en la línea de ${esc(p.name)}.</p><div class="tl">${slots.join('')}</div>
+    <div class="stick"><button class="primary" data-act="steal-ok" ${G.stealPick == null ? 'disabled' : ''}>Confirmar robo (−1 ficha)</button>
+    <button class="ghost" style="width:100%;margin-top:8px" data-act="steal-back">Cancelar</button></div>`;
 }
 
 function endView() {
@@ -473,7 +504,7 @@ function render() {
   const app = $('#app');
   const keep = document.activeElement && document.activeElement.id;
   app.innerHTML = view === 'setup' ? setupView() : view === 'game' ? gameView() : endView();
-  if (view === 'game' && G.phase === 'play') paintAudio();
+  if (view === 'game' && (G.phase === 'play' || G.phase === 'steal')) paintAudio();
   if (keep) { const e = document.getElementById(keep); if (e && e.tagName === 'INPUT') e.focus(); }
 }
 
@@ -503,6 +534,11 @@ document.addEventListener('click', e => {
   else if (a === 'start') { saveS(); startGame(); }
   else if (a === 'pick') { G.pick = +v; saveG(); }
   else if (a === 'y-' || a === 'y+') { G.guess = Math.min(2030, Math.max(1900, G.guess + (a === 'y+' ? 1 : -1))); saveG(); }
+  else if (a === 'thief') { G.thief = +v; G.stealPick = null; saveG(); }
+  else if (a === 'steal-back') { G.thief = null; G.stealPick = null; saveG(); }
+  else if (a === 'steal-pick') { G.stealPick = +v; saveG(); }
+  else if (a === 'steal-ok') { G.players[G.thief].tokens--; resolve_(); }
+  else if (a === 'nothief') { G.thief = null; resolve_(); }
   else if (a === 'confirm') { if (G.mode === 'timeline' ? G.pick == null : !G.guess) return; confirm_(); }
   else if (a === 'next') advance();
   else if (a === 'skipsong') { nextSongKeepTurn(); }
@@ -522,10 +558,11 @@ document.addEventListener('input', e => {
 document.addEventListener('change', e => {
   const t = e.target;
   if (t.dataset.num) { let n = Math.round(+t.value); const k = t.dataset.num;
-    if (k === 'from' || k === 'to') n = Math.min(2025, Math.max(1940, n || DEFAULTS[k])); else n = Math.min(30, Math.max(3, n || DEFAULTS[k]));
+    if (k === 'from' || k === 'to') n = Math.min(2025, Math.max(1940, n || DEFAULTS[k])); else if (k === 'tokens') n = Math.min(10, Math.max(0, isNaN(n) ? DEFAULTS[k] : n)); else n = Math.min(30, Math.max(3, n || DEFAULTS[k]));
     S[k] = n; if (S.from > S.to) { k === 'from' ? S.to = S.from : S.from = S.to; } saveS(); render(); }
   else if (t.dataset.sp) { render(); }
   else if (t.dataset.spl) { t.checked ? spSel.add(t.dataset.spl) : spSel.delete(t.dataset.spl); render(); }
+  else if (t.dataset.chk === 'tbonus') { const p = G.players[G.turn]; G.res.tbonus = t.checked; p.tokens += t.checked ? 1 : -1; saveG(); render(); }
   else if (t.dataset.chk === 'bonus') {
     const p = G.players[G.turn]; G.res.bonus = t.checked; p.score += t.checked ? 1 : -1; saveG(); }
   else if (t.dataset.chk) { S[t.dataset.chk] = t.checked; saveS(); render(); }

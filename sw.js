@@ -1,5 +1,5 @@
 /* Hitparty: deja la app disponible sin internet. El audio (iTunes) nunca se guarda aquí. */
-const APP = 'hp-app-0.1.0';
+const APP = 'hp-app-0.2.0';
 const SHELL = ['./', './index.html', './songs.js', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-180.png'];
 self.addEventListener('install', e => e.waitUntil(caches.open(APP).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())));
 self.addEventListener('activate', e => e.waitUntil(caches.keys()

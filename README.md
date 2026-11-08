@@ -3,6 +3,7 @@
 Juego tipo Hitster desde el teléfono: suena una canción (vista previa de 30 s), tú adivinas el año.
 
 - **Modos:** Línea de tiempo (coloca la canción en orden; gana quien llena su línea) y Adivina el año (puntos: exacto 3, ±2 años 2, ±5 años 1, +1 bonus por título y artista).
+- **Robar carta (línea de tiempo):** cada jugador empieza con fichas (2 por defecto). Tras colocar su carta, otro jugador puede gastar 1 ficha para elegir otra posición en esa línea; si quien jugó falla y el ladrón acierta, la carta pasa a la línea del ladrón. Acertar título y artista da +1 ficha.
 - **Filtros:** rango de años, décadas, idioma, género, no repetir canciones ya jugadas.
 - **Jugadores:** hasta 8, con nombre.
 - **Mis canciones:** agrega las tuyas (título, artista, año, idioma, género).
